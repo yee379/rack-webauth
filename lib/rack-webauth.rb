@@ -110,7 +110,7 @@ class Rack::Webauth
     # be read on demand, though.
     def initialize(env)
       @env = env
-      @login = (env["WEBAUTH_USER"] || env["REMOTE_USER"])
+      @login = (env["WEBAUTH_USER"] || env["REMOTE_USER"] || env["HTTP_PROXY_USER"])
       @logged_in = (@login && !@login.empty? && @login != ANONYMOUS)
       # reset login if it was "" or ANONYMOUS
       @login = nil unless @logged_in
